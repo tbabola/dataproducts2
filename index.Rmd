@@ -1,0 +1,45 @@
+---
+title: "Data products project"
+author: "T. Babola"
+date: "8/5/2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+```
+
+## Sweet graph
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+data <- read.csv('./data/nutritionInfo.csv')
+data <- data[grepl('CANDIES',data$Shrt_Desc),]
+#grab 20 random values
+set.seed(2019-08-05)
+index <- sample(1:dim(data)[1],20,replace=FALSE)
+gData <- data[index,]
+f <- list(
+  family = "Courier New, monospace",
+  size = 18,
+  color = "#7f7f7f"
+)
+x <- list(
+  title = "Energy (Kcal)",
+  titlefont = f
+)
+y <- list(
+  title = "Sugar (g)",
+  titlefont = f
+)
+p <- plot_ly(gData, x=~Energ_Kcal, y=~Sugar_Tot_.g., text = ~Shrt_Desc, color = ~Protein_.g.) %>% 
+    layout(xaxis = x, yaxis =y)
+p
+```
+
+## Thanks
+
+- Hope you
+- enjoyed the
+- graph!
